@@ -1,0 +1,25 @@
+* CS Amplifier - Phase 4: Output Impedance (Thevenin Test)
+M1 Drain Gate Source Source VN2222_RIIL
+Rs1 Source S_mid {RS1_val}
+Rd Vdd Drain {RD_val}
+Rs2 S_mid 0 {RS2_val}
+R1 Vdd Gate {R1_val}
+R2 Gate 0 {R2_val}
+Cs 0 S_mid {Cs_val}
+V1 Vdd 0 12
+Cin Gate Vin {Cin_val}
+Cout Vout Drain {Cout_val}
+
+* Sinyal Input Utama DIMATIKAN (Dihubung singkat ke Ground)
+V2 Vin 0 0
+
+* Sinyal Test Thevenin disuntikkan di terminal Output (Drain)
+Itest 0 Drain AC 1 <-- Suntik arus 1A AC
+
+* --- Model MOSFET Level 1 ---
+.model VN2222_RIIL NMOS(Level=1 VTO={my_VTO} KP={my_KP} LAMBDA={my_LAMBDA})
+
+* --- Perintah Analisis: AC Sweep (Cukup di daerah midband) ---
+.ac dec 100 1 100Meg
+.backanno
+.end

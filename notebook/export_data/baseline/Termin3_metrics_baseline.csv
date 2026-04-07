@@ -1,0 +1,10 @@
+Metric,Value,Unit
+Midband Gain (Linear),10.299816,V/V
+Midband Gain (Decibel),20.256589,dB
+Midband Phase Shift,-179.999994,deg
+Lower Cutoff Freq (f_L),13.18 Hz,Hz
+Upper Cutoff Freq (f_H),97.72 MHz,Hz
+Bandwidth (-3dB),97.72 MHz,Hz
+Unity Gain Freq (f_T),-,Hz
+Input Resistance (Rin @ Mid),27300.000000,Ohm
+Output Resistance (Rout @ Mid),1518.720986,Ohm

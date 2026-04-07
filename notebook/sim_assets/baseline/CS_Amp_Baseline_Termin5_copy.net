@@ -1,0 +1,14 @@
+* MOSFET Characterization Testbench Murni
+M1 Drain Gate 0 0 VN2222_RIIL
+Vds Drain 0 12
+Vgs Gate 0 0
+
+* Perintah Analisis DC Sweep:
+* 1. Sapu Vds (0 ke 12V, step 0.1V) -> Buat kurva output
+* 2. Langkah Vgs (1.5V ke 4.5V, step 0.5V) -> Buat multiple line kurva output
+.dc Vds 0 12 0.1 Vgs 1.529 4.5 0.5
+
+* Model MOSFET (Pastiin parameter VTO sesuai)
+.model VN2222_RIIL NMOS(Level=1 VTO={my_VTO} KP={my_KP} LAMBDA={my_LAMBDA})
+.backanno
+.end

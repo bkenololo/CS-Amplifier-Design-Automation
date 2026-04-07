@@ -1,0 +1,36 @@
+* /Users/bkent/Documents/Academic/ITB/Semester Genap 25:26/Prak Elka1/tubes/notebook/CS_Amp_Baseline_LoadEffect.asc
+M1 Drain Gate N002 N002 VN2222_RIIL
+Rs1 N002 Source {RS1_val}
+Rd Vdd Drain {RD_val}
+Rs2 Source 0 {RS2_val}
+R1 Vdd Gate {R1_val}
+R2 Gate 0 {R2_val}
+Cs 0 Source {Cs_val}
+V1 Vdd 0 12
+Cin Gate N001 {Cin_val}
+Cout Vout Drain {Cout_val}
+V2 Vin 0 SINE(0 2m 1k)
+Rin_Osiloskop Vout 0 1000k
+Rout_Sumber N001 Vin 50
+.model NMOS NMOS
+.model PMOS PMOS
+.lib /Users/bkent/Library/Application Support/LTspice/lib/cmp/standard.mos
+* --- Parameter Ekstraksi Silikon ---
+.param my_VTO = 1.529
+.param my_KP = 31.9m
+.param my_LAMBDA = 0.0234
+* --- Parameter Komponen E24 ---
+.param RD_val = 1600
+.param RS1_val = 82
+.param RS2_val = 430
+.param R1_val = 91k
+.param R2_val = 39k
+* --- Parameter Kapasitor (Initial) ---
+.param Cin_val = 10u
+.param Cout_val = 10u
+.param Cs_val = 100u
+* --- Model MOSFET Level 1 ---
+.model VN2222_RIIL NMOS(Level=1 VTO={my_VTO} KP={my_KP} LAMBDA={my_LAMBDA})
+.tran 10m
+.backanno
+.end

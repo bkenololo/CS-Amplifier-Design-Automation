@@ -1,0 +1,11 @@
+Parameter,Calculated Value (Raw Float),Unit
+Operation Region,Saturation 🟢,-
+Drain Current (ID),3.2167958561331034,mA
+Gate-Source Voltage (VGS),1.953003,V
+Drain-Source Voltage (VDS),5.206138077618305,V
+Overdrive Voltage (VOV),0.42400304889678964,V
+Transconductance (gm),15.17345624991547,mA/V
+Output Resistance (ro),13284.97195542099,Ohm
+Input Resistance (Rin),27300.0,Ohm
+Output Resistance (Rout),1518.7209860623068,Ohm
+Theoretical Gain (Av),-10.240085959072204,V/V
