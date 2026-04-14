@@ -1,0 +1,13 @@
+* MOSFET Transfer Characteristics Nested Sweep
+M1 Drain Gate 0 0 VN2222_RIIL
+Vds Drain 0 12
+Vgs Gate 0 0
+
+* Inner Sweep: Vgs (0 to 5V, step 0.01V)
+* Outer Sweep: Vds (2V to 12V, step 2V)
+.dc Vgs 0 5 0.01 Vds 2 12 2
+
+* Model MOSFET
+.model VN2222_RIIL NMOS(Level=1 VTO={my_VTO} KP={my_KP} LAMBDA={my_LAMBDA})
+.backanno
+.end

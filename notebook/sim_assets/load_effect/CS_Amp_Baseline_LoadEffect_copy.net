@@ -1,0 +1,48 @@
+* CS Amp - Phase 6: Load Effect Analysis (Bode Plot)
+M1 Drain Gate N002 N002 VN2222_RIIL
+Rs1 N002 Source {RS1_val}
+Rd Vdd Drain {RD_val}
+Rs2 Source 0 {RS2_val}
+R1 Vdd Gate {R1_val}
+R2 Gate 0 {R2_val}
+Cs 0 Source {Cs_val}
+V1 Vdd 0 12
+
+Cin Gate N001 {Cin_val}
+Cout Vout Drain {Cout_val}
+
+* AC Source untuk Bode Plot (GANTI DARI SINE JADI AC 1)
+V2 Vin 0 AC 1
+Rout_Sumber N001 Vin {Rsig_val}
+
+* ----------------------------------------------------
+* BEBAN SEBENARNYA (Akan dioverride oleh Python)
+RL Vout 0 {RL_val}
+* ----------------------------------------------------
+
+* --- Parameter Ekstraksi Silikon ---
+.param my_VTO = 1.529
+.param my_KP = 31.9m
+.param my_LAMBDA = 0.0234
+
+* --- Parameter Komponen E24 ---
+.param RD_val = 1600
+.param RS1_val = 82
+.param RS2_val = 430
+.param R1_val = 91k
+.param R2_val = 39k
+.param Cin_val = 10u
+.param Cout_val = 10u
+.param Cs_val = 100u
+
+* Nilai Default Load (Biar netlist gak error kalau di-run manual)
+.param RL_val = 1Meg 
+.param Rsig_val = 50 
+
+* --- Model MOSFET Level 1 ---
+.model VN2222_RIIL NMOS(Level=1 VTO={my_VTO} KP={my_KP} LAMBDA={my_LAMBDA})
+
+* --- Perintah Simulasi (Sapu Frekuensi 1Hz sampai 100MHz) ---
+.ac dec 100 1 100Meg
+.backanno
+.end
