@@ -1,34 +1,29 @@
-# CS-Amplifier-Design-Automation
-A high-precision, reproducible design framework for a Common-Source MOSFET Amplifier with Partial Source Degeneration, featuring automated E24 component selection and DC bias stability analysis.
+# Automated Design & Verification of a Common-Source Amplifier
 
-# High-Precision Common-Source Amplifier Design
+This repository contains a high-precision design and automated verification framework for a Common-Source Amplifier using the VN2222LL MOSFET. The project bridges theoretical circuit synthesis with industrial-grade simulation practices using Python and LTspice.
 
-This repository contains a **reproducible design framework** for a Common-Source (CS) MOSFET Amplifier using the **VN2222LL** N-channel MOSFET. 
+## Key Features
+- **High-Precision Synthesis:** Component derivation using 64-bit floating-point precision to minimize numerical drift.
+- **Automated SPICE Pipeline:** Integration of `PyLTSpice` for headless simulation execution and data extraction.
+- **Multi-Phase Verification:** Six-stage testing suite covering DC Bias, Transient Response, Spectral Analysis (Bode), Impedance Verification, and Device Characterization.
+- **Real-World Modeling:** Quantitative analysis of Gain degradation caused by output loading and resistive parasitics (ESR & Trace Resistance).
 
-The project focuses on achieving strict analog specifications through automated computational design, bypassing traditional manual rounding errors by utilizing 64-bit floating-point precision.
+## Design Specifications
+| Parameter | Target Value |
+|-----------|--------------|
+| Topology  | Common-Source (Source Degenerated) |
+| Voltage Gain ($A_v$) | 10 V/V (20 dB) |
+| Input Resistance ($R_{in}$) | 27 kΩ |
+| Output Resistance ($R_{out}$) | 1.5 kΩ |
+| Supply Voltage ($V_{DD}$) | 12.0 V |
 
-## 🚀 Key Features
-* **Reverse-Flow Design:** Calculations prioritize Output Resistance ($R_{out}$) and Gain ($A_v$) targets to derive optimal component values.
-* **E24 Standardization:** Integrated logic to automatically map exact theoretical values to the closest standard E24 resistor series.
-* **DC Bias Stability Analysis:** Automated solver for the quadratic $I_D$ equation to verify the "Auto-Correction" (Negative Feedback) capabilities of the source degeneration network.
-* **Error Validation:** Real-time calculation of percentage errors between theoretical targets and E24-based physical reality.
+## Project Structure
+- `CS_Amplifier_Automated_Verification.ipynb`: The primary computational engine and documentation.
+- `schematic.asc`: The LTspice source file used for automated simulations.
+- `exports/`: Generated plots (Bode, Transient, IV Curves, and Parasitic Analysis).
 
-## 📈 Design Targets
-| Parameter | Specification |
-| :--- | :--- |
-| **Topology** | Common-Source with Partial Degeneration |
-| **Voltage Gain ($A_v$)** | 10 V/V (20 dB) |
-| **Input Resistance ($R_{in}$)** | 27 kΩ |
-| **Output Resistance ($R_{out}$)** | 1.5 kΩ |
-| **Supply Voltage ($V_{DD}$)** | 12.0 V |
-
-## 🛠️ Usage
-1. Open `Amplifier_Design.ipynb` in Jupyter Notebook or Google Colab.
-2. Update the **Silicon Parameters** ($V_{th}$, $K_n$, $\lambda$) in the first cell based on your lab measurements.
-3. Run all cells to generate the complete design table, including component values and stability tests.
-
-## 📚 Technical Background
-The design utilizes **Partial Source Degeneration**. This topology splits the source resistance into $R_{S1}$ (unbypassed for AC gain stability) and $R_{S2}$ (bypassed for DC biasing), allowing for independent control over transconductance linearization and maximum output swing.
+## Methodology
+The workflow follows a **Progressive Verification Plan**, starting from an idealized Baseline characterization to a non-ideal system model that accounts for PCB-level parasitic effects.
 
 ---
-*Developed as part of the EL2205 Electronics course at Bandung Institute of Technology (ITB).*
+*Developed as part of the EL2205 Major Assignment - Electrical Engineering, Bandung Institute of Technology (ITB).*

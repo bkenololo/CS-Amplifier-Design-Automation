@@ -36,8 +36,8 @@ RL Vout 0 {RL_val}
 .param Cs_val = 100u
 
 * Nilai Default Load (Biar netlist gak error kalau di-run manual)
-.param RL_val = 1Meg
-.param Rsig_val = 5k
+.param RL_val = 1.2Meg
+.param Rsig_val = 50
 
 * --- Model MOSFET Level 1 ---
 .model VN2222_RIIL NMOS(Level=1 VTO={my_VTO} KP={my_KP} LAMBDA={my_LAMBDA})

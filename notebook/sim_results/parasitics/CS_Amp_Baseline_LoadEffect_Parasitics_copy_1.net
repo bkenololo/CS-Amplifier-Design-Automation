@@ -1,0 +1,63 @@
+* CSSD Amp with Parasitics - AC Analysis
+M1 Drain Gate MOS_Source MOS_Source VN2222_RIIL
+Rs1 MOS_Source Source {RS1_val}
+Rd Vdd Drain {RD_val}
+Rs2 Source 0 {RS2_val}
+R1 Vdd Gate {R1_val}
+R2 Gate 0 {R2_val}
+Cs Cs_ESR Source {Cs_val}
+
+* Power Supply & Trace Parasitics
+V1 VDD_Src_Pos VDD_Src_Neg 12
+Rtrace_VCC_1 VDD_Src_Pos Vdd 0.2
+Rtrace_VCC_2 0 VDD_Src_Neg 0.2
+
+* Input Signal & Trace Parasitics
+V2 Vin_Src_Pos Vin_Src_Neg AC 1
+Rtrace_Vin_1 Vin_Src_Pos Vin 0.1
+Rtrace_Vin_2 0 Vin_Src_Neg 0.1
+
+* Input Path & ESR
+Rout_Sumber After_Rsig Vin {Rsig_val}
+Cin Cin_ESR After_Rsig {Cin_val}
+R_ESR_Cin Gate Cin_ESR 3
+
+* Output Path, ESR & Load
+Cout Cout_ESR Drain {Cout_val}
+R_ESR_Cout Vout Cout_ESR 3
+Rin_Osiloskop Vout 0 {RL_val}
+
+* Bypass ESR
+R_ESR_Cs 0 Cs_ESR 1.5
+
+* --- Model & Libraries ---
+.model NMOS NMOS
+.model PMOS PMOS
+.lib /Users/bkent/Library/Application Support/LTspice/lib/cmp/standard.mos
+
+* --- Parameter Ekstraksi Silikon ---
+.param my_VTO = 1.529
+.param my_KP = 31.9m
+.param my_LAMBDA = 0.0234
+
+* --- Parameter Komponen E24 ---
+.param RD_val = 1600
+.param RS1_val = 82
+.param RS2_val = 430
+.param R1_val = 91k
+.param R2_val = 39k
+.param Cin_val = 10u
+.param Cout_val = 10u
+.param Cs_val = 100u
+
+* --- Variabel untuk Python ---
+.param RL_val = 1.2Meg
+.param Rsig_val = 50
+
+* --- Model MOSFET Level 1 ---
+.model VN2222_RIIL NMOS(Level=1 VTO={my_VTO} KP={my_KP} LAMBDA={my_LAMBDA})
+
+* --- AC Analysis Instruction ---
+.ac dec 100 10 100MEG
+.backanno
+.end
